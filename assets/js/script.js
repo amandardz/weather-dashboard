@@ -22,7 +22,7 @@ var getCurrentWeather = function () {
             temp1El.textContent = "Temperature: " + data.main.temp + " ℉"
 
             var humid1El = document.querySelector('#humid1')
-            humid1.textContent = "Humid: " + data.main.humidity + "%"
+            humid1El.textContent = "Humid: " + data.main.humidity + "%"
 
             var wind1El = document.querySelector('#wind1')
             wind1El.textContent = "Wind Speed: " + data.wind.speed + " MPH"
@@ -47,16 +47,24 @@ var getCurrentWeather = function () {
         }
     });
 }
+
 getCurrentWeather();
-// var getDailyWeather = function() {
-//     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=32.7831&lon=-96.8067&cnt=5&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
-//     console.log(weatherUrl)
-//     fetch(weatherUrl)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log(data)
-// }
+var getDailyWeather = function() {
+    var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=32.7831&lon=-96.8067&cnt=5&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
+    console.log(weatherUrl)
+    fetch(weatherUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+            for(var i = 0; i < data.list[i].main.temp; i++){
+                var dailyCards = document.querySelector('.daily')
+                dailyCards.textContent = data.list[i].main.temp
+            }
+        });
+};
+
+getDailyWeather()
 
 // searchBtnEl.addEventListener('click', getCurrentWeather)
