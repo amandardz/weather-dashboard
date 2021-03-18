@@ -13,7 +13,6 @@ var printCityList = function(name) {
 
 var getCurrentWeather = function (cityName) {
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
-    console.log(weatherUrl)
     fetch(weatherUrl)
         .then(function (response) {
             return response.json();
@@ -34,54 +33,62 @@ var getCurrentWeather = function (cityName) {
             var wind1El = document.querySelector('#wind1')
             wind1El.textContent = "Wind Speed: " + data.wind.speed + " MPH"
         });
-        
-    var uvUrl = 'http://api.openweathermap.org/data/2.5/uvi?lat=32.7831&lon=-96.8067&cnt=5&appid=f05e59dca587993db2e06e2c3a372a11'
-    fetch(uvUrl)
-    .then(function (response){
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data)
-        var uv1El = document.querySelector('#uv1')
-        uv1El.textContent = "UV Index: " + data.value
-
-        if(data.value === 1 || data.value < 2){
-            uv1El.setAttribute("style", "color: green;")
-        } else if (data.value >= 3 && data.value <=5) {
-            uv1El.setAttribute("style", "color: yellow;")
-        } else {
-            uv1El.setAttribute("style", "color: red;")
-        }
-    });
-}
-
-
-var getDailyWeather = function() {
-    var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=32.7831&lon=-96.8067&cnt=5&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
-    console.log(weatherUrl)
-    fetch(weatherUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data)
-            for(var i = 0; i < data.list[i].main.temp; i++){
-                var dailyCards = document.querySelector('.daily')
-                dailyCards.textContent = data.list[i].main.temp
-            }
-        });
 };
 
-getDailyWeather()
+// var getUvIndex = function (cityName) {
+//     var uvUrl = 'https://api.openweathermap.org/data/2.5/uvi?q=' + cityName + '&appid=f05e59dca587993db2e06e2c3a372a11'
+    
+//     fetch(uvUrl)
+//     .then(function (response){
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         console.log(data)
+//         var uv1El = document.querySelector('#uv1')
+//         uv1El.textContent = "UV Index: " + data.value
+
+//         if(data.value === 1 || data.value < 2){
+//             uv1El.setAttribute("style", "color: green;")
+//         } else if (data.value >= 3 && data.value <= 5) {
+//             uv1El.setAttribute("style", "color: yellow;")
+//         } else {
+//             uv1El.setAttribute("style", "color: red;")
+//         }
+//     });
+// }
+
+
+// var getDailyWeather = function(cityName) {
+//     var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
+//     console.log(weatherUrl)
+//     fetch(weatherUrl)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data)
+//             for(var i = 0; i < ; i++){
+//                 var dailyCards = document.querySelector('.daily')
+//                 dailyCards.textContent = data.list[i].main.temp
+//             });
+// };
+
+// getDailyWeather();
 
 cityFormEl.addEventListener('submit', function(event){
-    event.preventDefault()
+    event.preventDefault();
     var cityNameVal = cityNameEl.value
     console.log(cityNameEl.value)
-    printCityList(cityNameVal);
-    getCurrentWeather(cityNameVal);
-    // Displays what the user inputted
-    // Add input to history list
-
+    var cityNameInput = ''
+    if (cityNameVal === cityNameInput) {
+        var messageEl = cityFormEl.children[1]
+        messageEl.classList.remove('d-none')
+        messageEl.classList.add('d-block')
+        messageEl.textContent = 'Please enter a city name'
+    } else {
+        printCityList(cityNameVal);
+        getCurrentWeather(cityNameVal);
+        getUvIndex(cityNameVal);
+    }
 });
 
