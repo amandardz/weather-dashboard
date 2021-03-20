@@ -8,11 +8,16 @@ var dailyCardEl = document.querySelector('.daily')
 var currentDate = new Date().toLocaleDateString('en-US')
 
 var printCityList = function(name) {
-    
     var cityListItem = document.createElement('li')
     cityListItem.classList.add('list-unstyled', 'list-group-item', 'list-group-item-active', 'mt-1')
     cityListItem.textContent = name;
     cityListEl.appendChild(cityListItem)
+
+    cityListItem.onclick = function(){
+        currentWeatherEl.innerHTML = '';
+        weeklyEl.innerHTML = '';
+        getCurrentWeather(event.target.textContent)
+      }
 };
 
 var getCurrentWeather = function (cityName) {
