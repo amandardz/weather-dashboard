@@ -7,6 +7,7 @@ var weeklyEl = document.querySelector('#weeklyWeather')
 var dailyCardEl = document.querySelector('.daily')
 var currentDate = new Date().toLocaleDateString('en-US')
 
+//Creating search history
 var printCityList = function(name) {
     var cityListItem = document.createElement('li')
     cityListItem.classList.add('list-unstyled', 'list-group-item', 'list-group-item-action', 'h6', 'mt-1')
@@ -16,11 +17,12 @@ var printCityList = function(name) {
     cityListItem.onclick = function(){
         currentWeatherEl.innerHTML = '';
         weeklyEl.innerHTML = '';
-        getCurrentWeather(event.target.textContent)
+        getWeather(event.target.textContent)
       }
 };
 
-var getCurrentWeather = function (cityName) {
+//Requesting and retrieving weather data
+var getWeather = function (cityName) {
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=f05e59dca587993db2e06e2c3a372a11'
     fetch(weatherUrl)
         .then(function (response) {
@@ -55,9 +57,11 @@ var getCurrentWeather = function (cityName) {
                         uv1El.setAttribute("style", "color: red;")
                     }
 
+                    //5-day forecast title
                     var weeklyLabelEl = document.querySelector('#weeklyLabel')
                     weeklyLabelEl.innerHTML = '<h3>' + '5-Day Forecast:' + '</h3>'
 
+                    //For loop for 5-day forecast
                     for(var i = 1; i < 6; i++){
                         var dailyDate = new Date(data.daily[i].dt * 1000).toLocaleDateString('en-US')
                         var dailyWeatherIcon = data.daily[i].weather[0].icon
@@ -71,6 +75,7 @@ var getCurrentWeather = function (cityName) {
         })
 };
 
+//Creating submit listener for form to invoke functions
 cityFormEl.addEventListener('submit', function(event){
     event.preventDefault();
     var cityNameVal = cityNameEl.value
@@ -85,6 +90,6 @@ cityFormEl.addEventListener('submit', function(event){
         currentWeatherEl.innerHTML = '';
         weeklyEl.innerHTML = '';
         printCityList(cityNameVal);
-        getCurrentWeather(cityNameVal);
+        getWeather(cityNameVal);
     }
 });
