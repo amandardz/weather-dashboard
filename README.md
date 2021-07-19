@@ -1,9 +1,15 @@
 # Weather Dashboard
-In this repository, the developer will create a weather dashboard that will retrieve weather data for multiple cities from OpenWeather API.
+The Weather Dashboard is a web application that uses OpenWeather API to find current weather conditions and forecasted weather for multiple cities.
+
+# Deployed Site
+https://amandardz.github.io/Weather-Dashboard/
+
 ## Table of Contents
 * [Installation](#installation)
+* [Built With](#built-with)
 * [Usage](#usage)
 * [License](#license)
+
 ## Installation
 1. Create a folder on desktop to download repository to.
 2. Copy the link to repository from GitHub.
@@ -12,19 +18,24 @@ In this repository, the developer will create a weather dashboard that will retr
 5. In the console, type the command <i> git clone </i> and paste the link to repository.
 6. Open repository in preferred coder editor.
 7. Begin.
+
+## Built With
+* JavaScript
+* [OpenWeather API](https://openweathermap.org/) - Weather API
+* [BootStrap](https://getbootstrap.com/) - CSS framework
+* [Font Awesome](https://fontawesome.com/) - Font and icon library
+
 ## Usage
-To begin, as a developer, think about how the user will interact with the weather dashboard to help break down steps to write the HTML, CSS, and Javascript necessary for it to perform its function. Below are the steps on how the user will interact with the weather dashboard.
 1. The user will input the name of the city in the search. The city will then be added to the search history.
 2. The user will be presented with current and future conditions (such as the temperature, humidity, wind speed, and UV index) for that city. 
 3. The user will be able to click on a city in the search history and be presented with current and future conditions for that city.
 
 <img src="assets\images\weather-dashboard-img.PNG" alt="Image of Weather Dashboard">
 
-[Click here to see Weather Dashboard](https://amandardz.github.io/weather-dashboard/) 
 ## License
 MIT License
 
-Copyright (c) [2021] [Amanda Rodriguez]
+Copyright (c) 2021 Amanda Rodriguez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
